@@ -1,0 +1,137 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Ứng viên"
+  nzOkText="Ok"
+  nzCancelText="Cancel"
+  (nzOnOk)="handleOk(this.action)"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <form nz-form>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Họ và tên</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.full_name name="full_name"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Giới tính</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select name="select-gender" [ngModel]=talent.gender>
+            <nz-option nzValue="male" nzLabel="Nam"></nz-option>
+            <nz-option nzValue="female" nzLabel="Nữ"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Năm sinh</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.birthdate name="birthdate"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Số điện thoại</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.phone name="phone" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Email</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.email name="email" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Vị trí ứng tuyển</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.applied_position name="applied_position" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Level</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select name="select-level" [ngModel]=talent.level>
+            <nz-option nzValue="juinor" nzLabel="Junior"></nz-option>
+            <nz-option nzValue="middle" nzLabel="Middle"></nz-option>
+            <nz-option nzValue="senior" nzLabel="Senior"></nz-option>
+            <nz-option nzValue="techlead" nzLabel="Teach Lead"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Bộ phận</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.department name="department" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Dự án</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.project name="project" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">CV</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.cv name="cv" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Lọc CV</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.criteria name="criteria" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Lịch phỏng vấn</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-date-picker
+            nzFormat="dd-MM-yyyy HH:mm"
+            [nzShowTime]="true"
+            nzMode="week"
+            [ngModel]=talent.scheduled_interview
+            name="scheduled_interview">
+          </nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Người phỏng vấn</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [ngModel]=talent.interviewer name="interviewer" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Kết quả phỏng vấn</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select name="gender" [ngModel]=talent.interview_result>
+            <nz-option nzValue="pass" nzLabel="Pass"></nz-option>
+            <nz-option nzValue="fail" nzLabel="Fail"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">Ghi chú</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-textarea-count [nzMaxCharacterCount]="500">
+            <textarea rows="4" formControlName="note" nz-input [ngModel]=talent.note></textarea>
+          </nz-textarea-count>
+        </nz-form-control>
+      </nz-form-item>
+
+    </form>
+  </ng-container>
+</nz-modal>

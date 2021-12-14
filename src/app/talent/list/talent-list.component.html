@@ -1,0 +1,87 @@
+<app-layout>
+  <app-talent-new
+    [isVisible]="isPopupTalentModal"
+    (canceled)="talentModalToggle()"
+    (reload)="getTalentList()"
+    [action]="action"
+  ></app-talent-new>
+  <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+<!--      <nz-form-item>-->
+<!--        <nz-form-control>-->
+<!--          <input-->
+<!--            nz-input-->
+<!--            placeholder="Họ và tên"-->
+<!--            [formControlName]="'full_name'",-->
+<!--          />-->
+<!--        </nz-form-control>-->
+<!--      </nz-form-item>-->
+    </div>
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+        <button nz-button (click)="resetForm()">Clear</button>
+      </div>
+    </div>
+  </form>
+  <br>
+  <button nz-button nzType="primary" (click)="popupTalentModal()">
+<!--    <i nz-icon nzType="poweroff"></i>-->
+    Thêm
+  </button>
+  <br>
+    <nz-table #columnTable [nzData]="talents" [nzScroll]="{ x: '1100px' }">
+      <thead>
+        <tr>
+          <th nzLeft>Họ và tên</th>
+          <th>Giới tính</th>
+          <th>Năm sinh</th>
+          <th>Điện thoại</th>
+          <th>Email</th>
+          <th>Vị trí ứng tuyển</th>
+          <th>Level</th>
+          <th>Bộ phận</th>
+          <th>Dự án</th>
+          <th>Ngày cập nhật</th>
+          <th>CV</th>
+          <th>Lọc CV</th>
+          <th>Lịch phỏng vấn</th>
+          <th>Người phỏng vấn</th>
+          <th>Kết quả phỏng vấn</th>
+          <th>Ghi chú</th>
+          <th nzRight></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of columnTable.data; index as idx">
+          <td nzLeft>{{data.full_name}}</td>
+          <td>{{data.gender}}</td>
+          <td>{{data.birthdate}}</td>
+          <td>{{data.phone}}</td>
+          <td>{{data.email}}</td>
+          <td>{{data.applied_position}}</td>
+          <td>{{data.level}}</td>
+          <td>{{data.department}}</td>
+          <td>{{data.project}}</td>
+          <td>{{data.updated_at | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{data.cv}}</td>
+          <td>{{data.criteria}}</td>
+          <td>{{data.scheduled_interview | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{data.interviewer}}</td>
+          <td>{{data.interview_result}}</td>
+          <td>{{data.note}}</td>
+          <td nzRight>
+            <a nz-dropdown [nzDropdownMenu]="menu4">
+              Cập nhật
+            </a>
+            <nz-dropdown-menu #menu4="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item (click)="popupTalentModal(data.id)">Sửa</li>
+                <li nz-menu-item>Xóa</li>
+              </ul>
+            </nz-dropdown-menu>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+</app-layout>
